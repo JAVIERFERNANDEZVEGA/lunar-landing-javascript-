@@ -1,0 +1,28 @@
+body,html{height:100%;padding:0px;margin:0px;background-color:black;}
+
+h1   {
+		color:green;
+		text-align: center;
+		position:fixed;
+		left:10%;
+	}
+	p,li {
+		color:white;
+		
+		
+	}
+#volver{
+		background-color:lightgrey;
+		color:green;
+		text-align: center;
+		border: 5px solid green;
+		padding: 5px;
+		position:fixed;
+		top:10px;
+		left:75%;
+		
+	}
+#lista {
+	position:fixed;
+	top:10%;
+}

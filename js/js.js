@@ -3,73 +3,97 @@ var v = 0;
 var g = 1.622;
 var a = g;
 var dt = 0.016683;
-var timer=null;
-var timerFuel=null;
-var fuel=100;
-
-//al cargar por completo la página...
+var timer;
+var l = 100;
+var d = 0;
 window.onload = function(){
-	//definición de eventos
+	//encender/apagar al apretar/soltar una tecla
+	
+	document.onkeydown = function(){
+		document.getElementById("war").src = "img/nave02.jpg";
+		a = -g;  
+		d = 10;
+		
+	}
+	document.onkeyup = function(){
+		document.getElementById("war").src = "img/nave01.jpg"; 
+		  a = g;
+		  d = 0;
+	}
+	//encender/apagar el motor al mantener click en la pantalla
+	document.onmousedown = function(){
+		
+		document.getElementById("war").src = "img/nave02.jpg";
+		a = -g;  
+		d = 10;
+		}
+	document.onmouseup = function () {
+		document.getElementById("war").src = "img/nave01.jpg"; 
+		  a = g;
+		  d = 0;	
+		}
 	//mostrar menú móvil
-    	document.getElementById("showm").onclick = function () {
+	
+    document.getElementById("showm").onclick = function () {
 		document.getElementsByClassName("c")[0].style.display = "block";
 		stop();
 	}
 	//ocultar menú móvil
 	document.getElementById("hidem").onclick = function () {
 		document.getElementsByClassName("c")[0].style.display = "none";
-		start();
+	start();
 	}
-	//encender/apagar el motor al hacer click en la pantalla
-	document.onclick = function () {
- 	  if (a==g){
-  		motorOn();
- 	  } else {
-  		motorOff();
- 	  }
-	}
-	//encender/apagar al apretar/soltar una tecla
-	document.onkeydown = motorOn;
-	document.onkeyup = motorOff;
+	
 	
 	//Empezar a mover nave
 	start();
+	
 }
 
-//Definición de funciones
+
+
 function start(){
 	timer=setInterval(function(){ moverNave(); }, dt*1000);
 }
+function verificar() {
+	if  (v<5){ 
+		alert("ENHORABUENA ATERRIZAJE EXITOSO");
+		clearInterval(timer);
+	} 
+	else { 
+	document.getElementById("war").src = "img/explosion.jpg";
+		clearInterval(timer);
+	}
+}	
+
+
 
 function stop(){
 	clearInterval(timer);
 }
 
 function moverNave(){
+	
+	l -= d * dt;
+    document.getElementById("fuel").innerHTML=l;
 	v +=a*dt;
 	document.getElementById("velocidad").innerHTML=v;
 	y +=v*dt;
 	document.getElementById("altura").innerHTML=y;
 	
 	//mover hasta que top sea un 70% de la pantalla
-	if (y<70){ 
-		document.getElementById("nave").style.top = y+"%"; 
-	} else { 
+	
+	if  (y<10){ 
 		stop();
 	}
-}
-function motorOn(){
-	a=-g;
-	if (timerFuel==null)
-	timerFuel=setInterval(function(){ actualizarAltura(); }, 100);	
-}
-function motorOff(){
-	a=g;
-	clearInterval(timerFuel);
-	timerFuel=null;
-}
-function actualizarAltura(){
-	//Aquí hay que cambiar el valor del marcador de Fuel...
-	fuel-=1;
-	document.getElementById("fuel").innerHTML=fuel;	
+		
+	else if (y<70){ 
+		document.getElementById("nave").style.top = y+"%";
+		
+		
+	} else { 
+	
+
+		verificar();
+	}
 }

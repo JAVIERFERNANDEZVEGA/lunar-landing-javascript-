@@ -1,0 +1,21 @@
+body{
+	background-color:black;
+	}
+	h1{
+		color:green;
+	}
+	p,li {
+		color:white;
+	}
+	#volver{
+		background-color:lightgrey;
+		color:green;
+		text-align: center;
+		border: 5px solid green;
+		padding: 5px;
+		width:80px;
+		position:fixed;
+		left:75%;
+		top:10px;
+		
+	}
