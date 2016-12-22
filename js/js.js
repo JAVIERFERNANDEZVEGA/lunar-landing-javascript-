@@ -10,28 +10,29 @@ window.onload = function(){
 	//encender/apagar al apretar/soltar una tecla
 	
 	document.onkeydown = function(){
-		document.getElementById("war").src = "img/nave02.jpg";
-		a = -g;  
-		d = 10;
-		
+	if  (l<=0){ 
+		motorOff();
+	} 
+	else { 
+	motorOn();
+	}
 	}
 	document.onkeyup = function(){
-		document.getElementById("war").src = "img/nave01.jpg"; 
-		  a = g;
-		  d = 0;
+	motorOff();
 	}
+	
 	//encender/apagar el motor al mantener click en la pantalla
 	document.onmousedown = function(){
-		
-		document.getElementById("war").src = "img/nave02.jpg";
-		a = -g;  
-		d = 10;
-		}
+	if  (l<=0){ 
+		motorOff();
+	} 
+	else { 
+	motorOn();
+	}
+	}
 	document.onmouseup = function () {
-		document.getElementById("war").src = "img/nave01.jpg"; 
-		  a = g;
-		  d = 0;	
-		}
+		motorOff();
+	}
 	//mostrar menú móvil
 	
     document.getElementById("showm").onclick = function () {
@@ -65,7 +66,17 @@ function verificar() {
 		clearInterval(timer);
 	}
 }	
-
+function motorOn() {
+		document.getElementById("war").src = "img/nave02.jpg";
+		a = -g;  
+		d = 10;	
+		}
+		
+function motorOff() {
+document.getElementById("war").src = "img/nave01.jpg"; 
+		  a = g;
+		  d = 0;	
+}
 
 
 function stop(){
